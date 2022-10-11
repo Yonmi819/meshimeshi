@@ -1,17 +1,1 @@
-<% @post_images.each do |post_image| %>
-<div>
-  <%= link_to post_image_path(post_image.id) do %>
-    <%= image_tag post_image.get_image %> <%#画像をリンク付けするときの記述方法　%>
-  <% end %>
-  <p>投稿ユーザー画像：<%= image_tag post_image.user.get_profile_image(100,100) %></p>
-  <p>ショップ名：<%= post_image.shop_name %></p>
-  <p>説明：<%= post_image.caption %></p>
-  <p>ユーザーネーム：<%= post_image.user.name %></p>
-  <p><%= link_to "#{post_image.post_comments.count} コメント", post_image_path(post_image.id) %></p>
-</div>
-<% end %>
-
-<%#@post_images.eachと記述することで、Post_imagesレコードの数だけ繰り返し処理を行います。
-
-さらに、各レコードの内容は、post?imageという変数に格納される
-post_images.[カラム名]と記述することで、レコードのカラムの内容を表示できる。%>
+<%= render 'layouts/list' , post_images: @post_images %>

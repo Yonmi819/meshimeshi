@@ -2,7 +2,14 @@ class PostImage < ApplicationRecord
     has_one_attached :image
     belongs_to :user
     has_many :post_comments , dependent: :destroy
+    has_many :favorites , dependent: :destroy
     
+    def favorited_by?(user) #ユーザーにいいねされているか？
+       favorites.exists?(user_id: user.id)#favoritesテーブルに引数で渡されたユーザーはいるか確認の処理をお願いしている(user_id :user.id)はユーザーidをカラムに代入しているという記述
+    end
+    
+    validates :shop_name, presence: true
+    validates :image, presence: true
     def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
